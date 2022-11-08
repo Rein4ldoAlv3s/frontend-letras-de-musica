@@ -3,14 +3,38 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { ArtistaCadComponent } from './components/artista/artista-cad/artista-cad.component';
+import { HeaderComponent } from './components/header/header.component';
+
+import {AccordionModule} from 'primeng/accordion';     //accordion and accordion tab
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {InputTextModule} from 'primeng/inputtext';
+import {FormsModule} from '@angular/forms';
+import {ButtonModule} from 'primeng/button';
+import {ToolbarModule} from 'primeng/toolbar';
+import { ArtistaListComponent } from './components/artista/artista-list/artista-list.component';
+import { HttpClientModule } from '@angular/common/http';
+import {TableModule} from 'primeng/table';
+
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HeaderComponent,
+    ArtistaCadComponent,
+    ArtistaListComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    AccordionModule,
+    BrowserAnimationsModule,
+    InputTextModule,
+    FormsModule,
+    ButtonModule,
+    ToolbarModule,
+    HttpClientModule,
+    TableModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,0 +1,11 @@
+#div-separation {
+    display: flex;
+
+}
+
+#div-list {
+    flex: 1;
+    margin-top: 18px;
+    margin-left: 50px;
+    
+}

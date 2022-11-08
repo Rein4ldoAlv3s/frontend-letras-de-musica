@@ -1,0 +1,31 @@
+<div id="form-div">
+    <h2>Informe os dados do artista:</h2>
+    <div class="form-element">
+        <span class="p-float-label">
+            <input type="text" id="inputtext" pInputText [(ngModel)]="nome">
+            <label for="inputtext">Nome do artista ou banda</label>
+        </span>
+    </div>
+    <div class="form-element">
+        <span class="p-float-label">
+            <input id="float-input" type="text" pInputText [(ngModel)]="genero">
+            <label for="float-input">Gênero Musical</label>
+        </span>
+    </div>
+    <div class="form-element">
+        <span class="p-float-label">
+            <input id="float-input" type="text" pInputText [(ngModel)]="pais">
+            <label for="float-input">País de Origem</label>
+        </span>
+    </div>
+    <div class="form-element">
+        <span class="p-float-label">
+            <textarea inputId="textarea" rows="10" style="resize: none;" cols="50" [(ngModel)]="integrantes"
+                pInputTextarea></textarea>
+            <label for="textarea">Integrantes</label>
+        </span>
+    </div>
+    
+    <button pButton pRipple type="button" label="Cadastrar" class="p-button-raised p-button-success p-button-text"></button>
+
+</div>
