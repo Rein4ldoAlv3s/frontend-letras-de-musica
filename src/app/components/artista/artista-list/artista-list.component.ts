@@ -22,6 +22,7 @@ export class ArtistaListComponent implements OnInit {
           {field: 'name', header: 'Gênero Musical', width: '20%' },
           { field: 'category', header: 'País de Origem', width: '20%' },      
           { field: 'quantity', header: 'Integrantes', width: '20%' },      
+          { field: 'id', header: '', width: '20%' },      
       ];
     }
 
