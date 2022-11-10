@@ -1,7 +1,7 @@
 <div style="display:flex; flex-direction:column; padding-right: 14px;">
 
     <p-table #dt [resizableColumns]="true" [scrollable]="true" styleClass="p-datatable-gridlines"
-        responsiveLayout="scroll" [columns]="cols" [value]="products" [paginator]="true" [rows]="5"
+        responsiveLayout="scroll" [columns]="cols" [value]="artistas" [paginator]="true" [rows]="5"
         [rowsPerPageOptions]="[5,15,20,50]" totalRecords:4 pageLinks:3>
         <ng-template pTemplate="caption">
             <div style="display: flex; justify-content: space-between;
@@ -27,22 +27,32 @@
         <ng-template pTemplate="body" let-rowData let-columns="columns">
             <tr>
                 <td *ngFor="let col of columns" style="flex-basis:20%" [style]="{'width':'150px'}">
-                    
+
                     <ng-template [ngIf]=" col.header !== '' " [ngIfElse]="loadId">
                         {{rowData[col.field]}}
                     </ng-template>
-                       
+                    
                     <ng-template #loadId>
-                        <button pButton pRipple type="button" icon="pi pi-eye" class="p-button-rounded p-button-text"></button>
-                        <button pButton pRipple type="button" icon="pi pi-pencil" class="p-button-rounded p-button-text"></button>
-                        <button pButton pRipple type="button" icon="pi pi-trash" class="p-button-rounded p-button-text"></button>
-                
-                        {{rowData[col.field.id]}}
-                        
+                        <button pButton pRipple type="button" (click)="showBasicDialog(rowData[col.field])" icon="pi pi-eye"
+                            class="p-button-rounded p-button-text"></button>
+                        <p-dialog header="Header" [(visible)]="displayBasic" [style]="{width: '50vw'}"
+                            [baseZIndex]="10000">
+                            
+                            
+                            <h5>{{artista.nome}}</h5>
+                            <p>{{artista.generoMusical}}</p>
+                            <p>{{artista.paisDeOrigem}}</p>
+                            <p>{{artista.integrantes}}</p>
+                           
+                        </p-dialog>
+                        <button pButton pRipple type="button" icon="pi pi-pencil"
+                            class="p-button-rounded p-button-text"></button>
+                        <button pButton pRipple type="button" icon="pi pi-trash"
+                            class="p-button-rounded p-button-text"></button>
                     </ng-template>
 
                 </td>
             </tr>
         </ng-template>
     </p-table>
-</div>
+</div>	

@@ -1,54 +1,28 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Artista } from './artista';
+import { environment } from 'src/environments/environment';
+import { Artistaa } from './artistaa';
+import { Observable } from 'rxjs';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class ArtistaService {
 
-  status: string[] = ['OUTOFSTOCK', 'INSTOCK', 'LOWSTOCK'];
-
-    productNames: string[] = [
-        "Bamboo Watch", 
-        "Black Watch", 
-        "Blue Band", 
-        "Blue T-Shirt", 
-        "Bracelet", 
-        "Brown Purse", 
-        "Chakra Bracelet",
-        "Galaxy Earrings",
-        "Game Controller",
-        "Gaming Set",
-        "Gold Phone Case",
-        "Green Earbuds",
-        "Green T-Shirt",
-        "Grey T-Shirt",
-        "Headphones",
-        "Light Green T-Shirt",
-        "Lime Band",
-        "Mini Speakers",
-        "Painted Phone Case",
-        "Pink Band",
-        "Pink Purse",
-        "Purple Band",
-        "Purple Gemstone Necklace",
-        "Purple T-Shirt",
-        "Shoes",
-        "Sneakers",
-        "Teal T-Shirt",
-        "Yellow Earbuds",
-        "Yoga Mat",
-        "Yoga Set",
-    ];
+    baseUrl: string = environment.baseUrlArtista;
 
     constructor(private http: HttpClient) { }
 
-    getProductsSmall() {
-        return this.http.get<any>('assets/products-small.json')
-        .toPromise()
-        .then(res => <Artista[]>res.data)
-        .then(data => { return data; });
+    getAll(): Observable<Artistaa[]>{
+        const url = this.baseUrl + "/artistas/";
+        return this.http.get<Artistaa[]>(url);
+    }
+
+    findById(id : any): Observable<Artistaa>{
+        const url = this.baseUrl + "/artistas/" + id;
+        return this.http.get<Artistaa>(url);
     }
 
     getProducts() {
@@ -65,50 +39,4 @@ export class ArtistaService {
         .then(data => { return data; });
     }
 
-    generatePrduct(): Artista {
-        const product: Artista =  {
-            id: this.generateId(),
-            name: this.generateName(),
-            description: "Product Description",
-            price: this.generatePrice(),
-            quantity: this.generateQuantity(),
-            category: "Product Category",
-            inventoryStatus: this.generateStatus(),
-            rating: this.generateRating()
-        };
-
-        product.image = product.name.toLocaleLowerCase().split(/[ ,]+/).join('-')+".jpg";;
-        return product;
-    }
-
-    generateId() {
-        let text = "";
-        let possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-        
-        for (var i = 0; i < 5; i++) {
-            text += possible.charAt(Math.floor(Math.random() * possible.length));
-        }
-        
-        return text;
-    }
-
-    generateName() {
-        return this.productNames[Math.floor(Math.random() * Math.floor(30))];
-    }
-
-    generatePrice() {
-        return Math.floor(Math.random() * Math.floor(299)+1);
-    }
-
-    generateQuantity() {
-        return Math.floor(Math.random() * Math.floor(75)+1);
-    }
-
-    generateStatus() {
-        return this.status[Math.floor(Math.random() * Math.floor(3))];
-    }
-
-    generateRating() {
-        return Math.floor(Math.random() * Math.floor(5)+1);
-    }
 }

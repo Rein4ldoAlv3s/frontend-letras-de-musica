@@ -15,6 +15,7 @@ import {ToolbarModule} from 'primeng/toolbar';
 import { ArtistaListComponent } from './components/artista/artista-list/artista-list.component';
 import { HttpClientModule } from '@angular/common/http';
 import {TableModule} from 'primeng/table';
+import {DialogModule} from 'primeng/dialog';
 
 
 @NgModule({
@@ -34,7 +35,8 @@ import {TableModule} from 'primeng/table';
     ButtonModule,
     ToolbarModule,
     HttpClientModule,
-    TableModule
+    TableModule,
+    DialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]
