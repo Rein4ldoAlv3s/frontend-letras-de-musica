@@ -16,6 +16,12 @@ import { ArtistaListComponent } from './components/artista/artista-list/artista-
 import { HttpClientModule } from '@angular/common/http';
 import {TableModule} from 'primeng/table';
 import {DialogModule} from 'primeng/dialog';
+import { MessageService } from 'primeng/api';
+import { ConfirmationService } from 'primeng/api';
+import {ConfirmPopupModule} from 'primeng/confirmpopup';
+import {ToastModule} from 'primeng/toast';
+import { PrimeNGConfig } from 'primeng/api';
+
 
 
 @NgModule({
@@ -36,9 +42,11 @@ import {DialogModule} from 'primeng/dialog';
     ToolbarModule,
     HttpClientModule,
     TableModule,
-    DialogModule
+    DialogModule,
+    ConfirmPopupModule,
+    ToastModule,
   ],
-  providers: [],
+  providers: [MessageService, ConfirmationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

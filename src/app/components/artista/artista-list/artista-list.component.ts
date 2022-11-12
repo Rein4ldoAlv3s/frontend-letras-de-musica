@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Artista } from 'src/app/services/artista';
 import { ArtistaService } from 'src/app/services/artista.service';
 import { Artistaa } from 'src/app/services/artistaa';
-import { PrimeNGConfig } from 'primeng/api';
+import { ConfirmationService, MessageService, PrimeNGConfig } from 'primeng/api';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Observable } from 'rxjs';
+
 
 @Component({
   selector: 'app-artista-list',
@@ -22,15 +24,19 @@ export class ArtistaListComponent implements OnInit {
   cols: any[] = [];
   displayBasic: boolean | undefined;
   temporary: number = 0;
+  artistaShowDialog: boolean = false;
   
 
     constructor(
       private artistaService: ArtistaService,
-      private primengConfig: PrimeNGConfig
+      private primengConfig: PrimeNGConfig,
+      private confirmationService: ConfirmationService,
+      private router: Router,
+      private messageService: MessageService,
     ) { }
 
     ngOnInit() {
-        this.artistaService.getAll().subscribe(data => this.artistas = data) ;
+        this.getAllArtistas();
         this.cols = [
           { field: 'nome', header: 'Nome', width: '20%' },
           { field: 'generoMusical', header: 'Gênero Musical', width: '20%' },
@@ -41,19 +47,41 @@ export class ArtistaListComponent implements OnInit {
       this.primengConfig.ripple = true;
     }
 
+    getAllArtistas(){
+      this.artistaService.getAll().subscribe(data => this.artistas = data);
+    }
     
 
-    editProduct(artista: Artista[]): void {
+    editProduct(artista: Artistaa[]): void {
       console.log("")
     }
 
-    deleteProduct(artista: Artista[]): void {
-      console.log("")
+    deleteProduct(artista: Artistaa){
+      
     }
 
-    showBasicDialog(id: number) {
+    deleteById(artista: Artistaa) {
+      this.confirmationService.confirm({
+          target: event.target,
+          message: 'Tem certeza em deletar o artista?',
+          acceptLabel: 'Sim',
+          rejectLabel: 'Não',
+          icon: 'pi pi-exclamation-triangle',
+          accept: () => {
+            this.artistaService.deleteById(artista.id).subscribe(artista => this.getAllArtistas());
+            this.messageService.add({
+              severity: "success",
+              detail: artista.nome + " foi deletado."
+            });
+          }
+      });
+  }
+
+  
+
+    showArtista(id: number){
       this.artistaService.findById(id).subscribe(data => this.artista = data);
-      this.displayBasic = true;
+      this.artistaShowDialog = true;
     }
 
 }

@@ -17,42 +17,67 @@
 
         </ng-template>
 
-        <ng-template pTemplate="header" let-columns>
+        <ng-template pTemplate="header">
             <tr>
-                <th *ngFor="let col of columns" pResizableColumn style="flex-basis:20%" [style]="{'width':'150px'}">
-                    {{col.header}}
+                <th pResizableColumn style="flex-basis:20%" [style]="{'width':'150px'}">
+                    Nome
+                </th>
+                <th pResizableColumn style="flex-basis:20%" [style]="{'width':'150px'}">
+                    Gênero Musical
+                </th>
+                <th pResizableColumn style="flex-basis:20%" [style]="{'width':'150px'}">
+                    País de Origem
+                </th>
+                <th pResizableColumn style="flex-basis:20%" [style]="{'width':'150px'}">
+                    Integrantes
+                </th>
+                <th pResizableColumn style="flex-basis:20%" [style]="{'width':'150px'}">
+
                 </th>
             </tr>
         </ng-template>
-        <ng-template pTemplate="body" let-rowData let-columns="columns">
+        <ng-template pTemplate="body" let-artista>
             <tr>
-                <td *ngFor="let col of columns" style="flex-basis:20%" [style]="{'width':'150px'}">
 
-                    <ng-template [ngIf]=" col.header !== '' " [ngIfElse]="loadId">
-                        {{rowData[col.field]}}
-                    </ng-template>
+                <td style="flex-basis:20%" [style]="{'width':'150px'}">{{artista.nome}}</td>
+                <td style="flex-basis:20%" [style]="{'width':'150px'}">{{artista.generoMusical}}</td>
+                <td style="flex-basis:20%" [style]="{'width':'150px'}">{{artista.paisDeOrigem}}</td>
+                <td style="flex-basis:20%" [style]="{'width':'150px'}">{{artista.integrantes}}</td>
+                <td style="flex-basis:20%" [style]="{'width':'150px'}">
+
+                    <button pButton pRipple type="button" (click)="showArtista(artista.id)" icon="pi pi-eye"
+                        class="p-button-rounded p-button-text"></button>
+
+                    <button pButton pRipple type="button" icon="pi pi-pencil"
+                        class="p-button-rounded p-button-text"></button>
+
                     
-                    <ng-template #loadId>
-                        <button pButton pRipple type="button" (click)="showBasicDialog(rowData[col.field])" icon="pi pi-eye"
-                            class="p-button-rounded p-button-text"></button>
-                        <p-dialog header="Header" [(visible)]="displayBasic" [style]="{width: '50vw'}"
-                            [baseZIndex]="10000">
-                            
-                            
-                            <h5>{{artista.nome}}</h5>
-                            <p>{{artista.generoMusical}}</p>
-                            <p>{{artista.paisDeOrigem}}</p>
-                            <p>{{artista.integrantes}}</p>
-                           
-                        </p-dialog>
-                        <button pButton pRipple type="button" icon="pi pi-pencil"
-                            class="p-button-rounded p-button-text"></button>
-                        <button pButton pRipple type="button" icon="pi pi-trash"
-                            class="p-button-rounded p-button-text"></button>
-                    </ng-template>
+                    <button pButton pRipple type="button" icon="pi pi-trash" (click)="deleteById(artista)"  
+                        class="p-button-rounded p-button-text">
+                        
+                    
+                    </button>
 
                 </td>
             </tr>
         </ng-template>
     </p-table>
-</div>	
+</div>
+
+<p-toast></p-toast>
+<p-confirmPopup ></p-confirmPopup>
+<p-dialog header="Mais informações" [(visible)]="artistaShowDialog" [style]="{width: '50vw'}" [baseZIndex]="10000">
+
+    <div style="font-size: 1.2rem;">
+        <p style="font-weight: bold; color: rgba(204, 204, 204, 0.57); font-size: 1.3rem">Nome </p>
+        <p> {{artista.nome}} </p><br>
+        <p style="font-weight: bold; color: rgba(204, 204, 204, 0.57); font-size: 1.3rem">Gênero Musical </p>
+        <p> {{artista.generoMusical}} </p><br>
+        <p style="font-weight: bold; color: rgba(204, 204, 204, 0.57); font-size: 1.3rem">País de Origem </p>
+        <p> {{artista.paisDeOrigem}} </p><br>
+        <p style="font-weight: bold; color: rgba(204, 204, 204, 0.57); font-size: 1.3rem">Integrantes </p>
+        <p *ngFor="let artistaIntegrante of artista.integrantes">
+            {{artistaIntegrante}}
+        </p>
+    </div>
+</p-dialog>

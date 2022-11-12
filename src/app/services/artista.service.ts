@@ -25,6 +25,11 @@ export class ArtistaService {
         return this.http.get<Artistaa>(url);
     }
 
+    deleteById(id: any):Observable<Artistaa>{
+        const url = this.baseUrl + "/artistas/" + id;
+        return this.http.delete<Artistaa>(url);
+    }
+
     getProducts() {
         return this.http.get<any>('assets/products.json')
         .toPromise()
@@ -39,4 +44,5 @@ export class ArtistaService {
         .then(data => { return data; });
     }
 
+  
 }
