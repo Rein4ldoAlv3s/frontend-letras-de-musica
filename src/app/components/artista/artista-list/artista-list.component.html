@@ -1,8 +1,8 @@
 <div style="display:flex; flex-direction:column; padding-right: 14px;">
 
     <p-table #dt [resizableColumns]="true" [scrollable]="true" styleClass="p-datatable-gridlines"
-        responsiveLayout="scroll" [columns]="cols" [value]="artistas" [paginator]="true" [rows]="5"
-        [rowsPerPageOptions]="[5,15,20,50]" totalRecords:4 pageLinks:3>
+        responsiveLayout="scroll" [columns]="cols" [value]="artistas" [paginator]="true" [rows]="15"
+        [rowsPerPageOptions]="[15,20,50]" totalRecords:4 pageLinks:3>
         <ng-template pTemplate="caption">
             <div style="display: flex; justify-content: space-between;
         align-items: flex-end;">
@@ -10,7 +10,7 @@
                     <h3>Artistas</h3>
                 </div>
                 <div>
-                    <input type="text" pInputText size="50" placeholder="Global Filter"
+                    <input type="text" pInputText size="50" placeholder="Pesquisar"
                         (input)="dt.filterGlobal($any($event.target).value, 'contains')" style="width:225px">
                 </div>
             </div>

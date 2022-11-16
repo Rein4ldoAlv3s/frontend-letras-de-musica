@@ -30,6 +30,11 @@ export class ArtistaService {
         return this.http.delete<Artistaa>(url);
     }
 
+    create(artista: Artistaa): Observable<Artistaa> {
+        const url = this.baseUrl + "/artistas";
+        return this.http.post<Artistaa>(url, artista);
+    }
+
     getProducts() {
         return this.http.get<any>('assets/products.json')
         .toPromise()

@@ -1,10 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output } from '@angular/core';
 import { ArtistaService } from 'src/app/services/artista.service';
 import { Artistaa } from 'src/app/services/artistaa';
 import { ConfirmationService, MessageService, PrimeNGConfig } from 'primeng/api';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
-
 
 @Component({
   selector: 'app-artista-list',
@@ -13,7 +12,9 @@ import { Observable } from 'rxjs';
 })
 export class ArtistaListComponent implements OnInit {
 
-  artistas: Artistaa[] = [];
+  
+  @Input() artistas: Artistaa[] = [];
+
   artista: Artistaa = {
     nome: '',
     generoMusical: '',
@@ -21,9 +22,13 @@ export class ArtistaListComponent implements OnInit {
     integrantes: [],
     id: 0
   };
+
   cols: any[] = [];
+
   displayBasic: boolean | undefined;
+
   temporary: number = 0;
+  
   artistaShowDialog: boolean = false;
   
 
@@ -63,7 +68,7 @@ export class ArtistaListComponent implements OnInit {
     deleteById(artista: Artistaa) {
       this.confirmationService.confirm({
           target: event.target,
-          message: 'Tem certeza em deletar o artista?',
+          message: 'Deseja excluir ' + artista.nome + "?",
           acceptLabel: 'Sim',
           rejectLabel: 'Não',
           icon: 'pi pi-exclamation-triangle',
